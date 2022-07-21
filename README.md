@@ -27,14 +27,18 @@ PUSH TEST: AGE OF ULTRON
 
 ### Front-End
     - React
-    -
-    -
+    - HTML
+    - CSS
+    - 
 
 
 ### Back-End
     - Express
-    -
-    -
+    - Morgan
+    - Mongoose
+    - Axios
+    - Cors
+    - 
 
 
 ### List of Mongoose models and their properties
