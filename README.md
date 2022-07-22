@@ -70,13 +70,14 @@ User = {
 ### List of Routes
 | Action | Method | Path                    | Action                                                               |
 | ------ | ------ | ----------------------- | -------------------------------------------------------------------- |
-| INDEX  | GET    | `/drinks`               | Read information about all recipes                                   |
-| NEW    | GET    | `/drinks/new`           | Show form to make new or copied recipe                               |
-| CREATE | POST   | `/drinks`               | Create a new recipe                                                  |
-| SHOW   | GET    | `/drinks/:drinkId`      | Read information about the recipe                                    |
-| EDIT   | GET    | `/drinks/:drinkId/edit` | Show existing form for existing recipe                               |
-| UPDATE | PUT    | `/drinks/:drinkId`      | Update the existing recipe with new content                          |
-| DESTROY| DELETE | `/drinks/:drinkId`      | Delete the existing recipe, then redirect                            |
+| INDEX  | GET    | `/index`                | Show list of Superheroes                                             |
+| CREATE | POST   | `/index/favorites`      | Favorite a Superhero                                                 |
+| SHOW   | GET    | `/index/:superheroeid`  | Read information about the Superhero                                 |
+| UPDATE | PUT    | `/index/:favoritelistid | Update favorite list                                                 |
+| DESTROY| DELETE | `/index/:favoritelistid | Delete Super hero from list                                          |
+| CREATE | POST   | '/index/createAccount'  | Create an account                                                    |
+| INDEX  | GET    | '/index/login'          | Login to account                                                     |
+| INDEX  | GET    | '/index/history'        | show previously viewed heroes                                        |
 
 
 ### User Stories
