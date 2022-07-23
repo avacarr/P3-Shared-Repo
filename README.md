@@ -65,10 +65,7 @@ User = {
 }
 
 ### API Connection Success
-![image](https://user-images.githubusercontent.com/101614781/180581937-a9db4838-ede4-4779-8232-dd8c0a8f17df.png)
-
-
-
+![apiSuccess](https://user-images.githubusercontent.com/101614781/180581991-39c17566-0c64-4aea-88ed-15f1067c5515.png)
 
 
 
