@@ -94,6 +94,7 @@ User = {
 
 ### Wireframe
 
+<img width="756" alt="p3-wireframe-login" src="https://user-images.githubusercontent.com/101517274/180585402-5eae9f77-e6a0-4814-9fdc-aa83c54c1816.png">
 
 <img width="759" alt="p3-wireframe1" src="https://user-images.githubusercontent.com/101517274/180585171-0f273f48-7900-41f7-8e4f-695ec59bb061.png">
 
