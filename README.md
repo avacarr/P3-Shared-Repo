@@ -65,7 +65,7 @@ User = {
 }
 
 ### API Connection Success
-![apiSuccess](https://user-images.githubusercontent.com/101614781/180581991-39c17566-0c64-4aea-88ed-15f1067c5515.png)
+![apiSuccess](/frontend/marvel-wiki/public/apiSuccess.png)
 
 
 
