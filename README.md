@@ -1,4 +1,4 @@
-# Marvel-Wiki
+ # Marvel-Wiki
   > SEI - Software Engineering Project 3 
   > Created By: Alex Carr, Damian Fletcher, Eric Pettaway, Jeremy Currier
 
@@ -94,6 +94,12 @@ User = {
 
 ### Wireframe
 
+
+<img width="759" alt="p3-wireframe1" src="https://user-images.githubusercontent.com/101517274/180585171-0f273f48-7900-41f7-8e4f-695ec59bb061.png">
+
+<img width="759" alt="p3-wireframe2" src="https://user-images.githubusercontent.com/101517274/180585173-587f667b-be8a-4e20-98ad-631911b426e6.png">
+
+<img width="725" alt="p3-wireframe3" src="https://user-images.githubusercontent.com/101517274/180585190-2779e2a6-c145-4973-a4f8-768c9dab3091.png">
 
 
 
