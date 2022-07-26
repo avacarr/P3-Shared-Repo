@@ -13,7 +13,7 @@ require('dotenv').config();
 require('./db/connection')
 require('./db/passport');
 
-var indexRouter = require('./routes/index');
+//var indexRouter = require('./routes/index');
 
 
 
