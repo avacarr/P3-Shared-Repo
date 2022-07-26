@@ -1,15 +1,11 @@
 import React from 'react'
-
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
+    const navigate = useNavigate()
   return (
     <>
-    This is a Home Page
-    This is where you will sign in to your profile and see your saved stuff
-    <form>
-      
-    </form>
-    
+        This will be your HOME
     </>
   )
 }
