@@ -20,9 +20,10 @@ const Navbar = () => {
   return (
     <NavbarContainer>
         <ul>
-            <li> Home </li>
-            <li> Search </li>
-            <li> Favs </li>
+            <li> <Link to='/'> Home </Link></li>
+            <li> <Link to='/events'> Events </Link></li>
+            <li> <Link to='/search'> Search </Link> </li>
+            <li> <Link to='/favorites'> Favs </Link> </li>
             <li> Log Out </li>
         </ul>
     </NavbarContainer>

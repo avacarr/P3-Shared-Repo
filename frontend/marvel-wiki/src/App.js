@@ -1,21 +1,58 @@
 
 import './App.css';
-<<<<<<< HEAD
 import { Routes, Route } from 'react-router-dom'
 import Login from './pages/LoginPage';
 import SearchPage from './pages/SearchPage';
 import Favorites from './pages/Favorites';
 import ResultsPage from './pages/ResultsPage';
 import Details from './pages/Details';
+import Events from './pages/Events'
 import Home from './pages/Home';
-=======
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const teamwork = 'makes the dream work'
+
 const publicKey = 'd17831e3dfc8de4dd77288bbf359d75c'
 const hash = '02c16f75a7739fec4472131e268997a6'
-
->>>>>>> Api Connected
 
 function App() {
   //API SECTION
@@ -660,22 +697,22 @@ function App() {
 
       const eventsPage1 = await axios(`https://gateway.marvel.com:443/v1/public/events?&ts=1&apikey=${publicKey}&hash=${hash}&limit=100&offset=0`)
 
-      setCharacterPage1(charactersPage1)
-      setCharacterPage2(charactersPage2)
-      setCharacterPage3(charactersPage3)
-      setCharacterPage4(charactersPage4)
-      setCharacterPage5(charactersPage5)
-      setCharacterPage6(charactersPage6)
-      setCharacterPage7(charactersPage7)
-      setCharacterPage8(charactersPage8)
-      setCharacterPage9(charactersPage9)
-      setCharacterPage10(charactersPage10)
-      setCharacterPage11(charactersPage11)
-      setCharacterPage12(charactersPage12)
-      setCharacterPage13(charactersPage13)
-      setCharacterPage14(charactersPage14)
-      setCharacterPage15(charactersPage15)
-      setCharacterPage16(charactersPage16)
+      setCharacterPage1(charactersPage1.data.data.results)
+      setCharacterPage2(charactersPage2.data.data.results)
+      setCharacterPage3(charactersPage3.data.data.results)
+      setCharacterPage4(charactersPage4.data.data.results)
+      setCharacterPage5(charactersPage5.data.data.results)
+      setCharacterPage6(charactersPage6.data.data.results)
+      setCharacterPage7(charactersPage7.data.data.results)
+      setCharacterPage8(charactersPage8.data.data.results)
+      setCharacterPage9(charactersPage9.data.data.results)
+      setCharacterPage10(charactersPage10.data.data.results)
+      setCharacterPage11(charactersPage11.data.data.results)
+      setCharacterPage12(charactersPage12.data.data.results)
+      setCharacterPage13(charactersPage13.data.data.results)
+      setCharacterPage14(charactersPage14.data.data.results)
+      setCharacterPage15(charactersPage15.data.data.results)
+      setCharacterPage16(charactersPage16.data.data.results)
 
       // setComicsPage1(comicsPage1)
       // setComicsPage2(comicsPage2)
@@ -995,9 +1032,12 @@ function App() {
       // setComicsPage296(comicsPage296)
       // setComicsPage297(comicsPage297)
       // setComicsPage298(comicsPage298)
+
       
 
-      setEventsPage1(eventsPage1)
+      setEventsPage1(eventsPage1.data.data.results)
+      console.log(eventsPage1.data.data.results)
+      console.log(charactersPage1.data.data.results)
       }
       fetch()
     },[])
@@ -1013,8 +1053,25 @@ function App() {
         <Route path='/favorites' element={ <Favorites /> } ></Route>
         <Route path='/results' element={ <ResultsPage /> } ></Route>
         <Route path='/details:id' element={ <Details /> } ></Route>
-        <Route path='/home' element={ <Home /> } ></Route>
-        
+        <Route path='/events' element={ <Events eventsPage1={eventsPage1}/> } ></Route>
+        <Route path='/home' element={ <Home  
+        charactersPage1={charactersPage1}
+        charactersPage2={charactersPage2}
+        charactersPage3={charactersPage3}
+        charactersPage4={charactersPage4}
+        charactersPage5={charactersPage5}
+        charactersPage6={charactersPage6}
+        charactersPage7={charactersPage7}
+        charactersPage8={charactersPage8}
+        charactersPage9={charactersPage9}
+        charactersPage10={charactersPage10}
+        charactersPage11={charactersPage11}
+        charactersPage12={charactersPage12}
+        charactersPage13={charactersPage13}
+        charactersPage14={charactersPage14}
+        charactersPage15={charactersPage15}
+        charactersPage16={charactersPage16}
+        /> } ></Route>
       </Routes>
     </div>
   );

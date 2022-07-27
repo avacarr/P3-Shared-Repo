@@ -5,8 +5,9 @@ const Home = () => {
   return (
     <>
     This is a Login Page
-    This is where you will sign in to your profile and see your saved stuff
-    <form>
+    This is where you will sign in to your profile and see your saved stuff\
+    ONCE HE SHARES WE WILL SEE THIS ON THE SCREEN
+    <form action='/home'>
       <div>
         <label htmlFor='name'>Username</label>
         <input type='text' name='name' id='name' />
