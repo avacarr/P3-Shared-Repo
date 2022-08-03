@@ -1,32 +1,52 @@
-const Users = require('../models/Users')
+const passport = require('passport');
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const Users = require('../models/Users');
 
-const login = (req, res) => {
+
+const googleLogin = async (req, res) => {
+    console.log("googleLogin called", req.data)
+    // const { token }  = req.body
+    // const ticket = await client.verifyIdToken({
+    //     idToken: token,
+    //     audience: process.env.GOOGLE_CLIENT_ID
+    // });
+    // const { name, email, picture } = ticket.getPayload();    
+    // const user = await db.user.upsert({ 
+    //     where: { email: email },
+    //     update: { name, picture },
+    //     create: { name, email, picture }
+    // })
+    // res.status(201)
+    // res.json(user)
+    res.json(JSON.parse(`{"Success": "true"}`))
+}
+
+const googleLogout = async (req, res) => {
+    console.log("googleLogin called", req.data)
     
 }
 
-const index = (req, res) => {
-    Users.find({}, (err, Users)=>{
-        if(err){ 
-        res.status(400).json(err)
-        return
-    }
 
-    res.json(Users)
-
-    })
-}
-
-const getHero = async (req, res) => {
+const getCharacter = async (req, res) => {
     console.log(req.body);
 
-    let newUsers = await Users.create(req.body)
+    //let getHero = await getHero.find(req.body)
 
-    res.json(newUsers)
+    res.json(getHero)
 }
 
+const getEvent = async (req, res) => {
+    console.log(req.body)
+
+    //let getEvent = await getEvent.find(req.body)
+
+    res.json(getEvent)
+}
 
 module.exports = {
-    login,
-    index,
-    getHero
+    googleLogin,
+    googleLogout,
+    getCharacter,
+    getEvent
 }

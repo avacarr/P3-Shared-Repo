@@ -11,7 +11,7 @@ const usersSchema = new mongoose.Schema({
     comic_events: [],
     creators: [],
     characters: []
-},
+  },
   view_history: {
     comics: [],
     comic_series: [],
@@ -22,5 +22,5 @@ const usersSchema = new mongoose.Schema({
   }
 });
 
-const Users = mongoose.model('Users', usersSchema);
-module.exports = Users
+
+module.exports = mongoose.models.Users || mongoose.model('Users', usersSchema)
