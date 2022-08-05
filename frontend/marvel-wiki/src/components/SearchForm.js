@@ -23,12 +23,12 @@ return (
   )
 }
 SearchForm.propTypes = {
-  handleChange: React.PropTypes.func,
-  handleSubmit: React.PropTypes.func,
-  placeholder: React.PropTypes.string
+  handleChange: React.PropTypes,
+  handleSubmit: React.PropTypes,
+  placeholder: React.PropTypes
 }
 
-console.log(React.PropTypes.func)
+console.log(React.PropTypes)
 export default SearchForm
 
 // WEBPACK FOOTER //

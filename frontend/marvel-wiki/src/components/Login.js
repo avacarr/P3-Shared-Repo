@@ -1,20 +1,20 @@
 import {GoogleLogin} from 'react-google-login'
 import React from 'react'
 
-let CLIENT_ID = '269560164013-j47b3davb459opfn0da9tb6rqkukv9rq.apps.googleusercontent.com'
-
+let CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 function LoginGoogle() {
-    const onSuccess = async (googleData) => {
-        console.log("Successfully logged in", googleData)
-        const res = await fetch('http://localhost:3001/google/login', {
-            method: 'POST',
-            body: JSON.stringify({
-                data: googleData
-            })
-        })
-        .then((res) => {console.log("successfull", res.body)})
 
+    const onSuccess = async (googleData) => {
+        console.log("Successfully logged in", googleData.profileObj.givenName)
+        await fetch('http://localhost:3001/google/login/'+`${googleData.profileObj.email}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(googleData.profileObj)
+        })
+        .then((res) => res.json())
+        .then((user) => {localStorage.setItem('user', JSON.stringify(user))})
+        window.location.reload()
     }
 
     const onFailure = (res) => {
@@ -25,14 +25,16 @@ function LoginGoogle() {
         <div>
             <GoogleLogin 
                 clientId={CLIENT_ID}
-                buttonText="Login"
+                buttonText="LOGIN"
                 onSuccess={onSuccess}
                 onFailure={onFailure}
                 cookiePolicy={'single_host_origin'}
                 isSignedIn={true}
+                theme="dark"
             />
         </div>
     )
 }
 
 export default LoginGoogle
+

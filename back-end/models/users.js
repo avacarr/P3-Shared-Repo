@@ -2,23 +2,20 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 const usersSchema = new mongoose.Schema({
-  username: String,
+  givenName: String,
+  familyName: String,
   email: String,
   favorites: {
     comics: [],
-    comic_series: [],
-    comic_stories: [],
-    comic_events: [],
-    creators: [],
-    characters: []
+    series: [],
+    characters: [],
+    events: []
   },
   view_history: {
     comics: [],
-    comic_series: [],
-    comic_stories: [],
-    comic_events: [],
-    creators: [],
-    characters: []
+    series: [],
+    characters: [],
+    events: []
   }
 });
 

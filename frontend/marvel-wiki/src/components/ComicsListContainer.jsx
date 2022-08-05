@@ -4,17 +4,17 @@ import PropTypes from 'prop-types'
 import { fetchObjects } from '../Utils/fetchUtils'
 import DataCard from './DataCard'
 //import Loader from './Loader'
-import Pagination from 'react-paginate'
+import Pagination from 'react-js-pagination'
 import Hr from './Hr'
 import Container from './Container'
 import Heading from './Heading'
 import Row from './Row'
 //import SearchForm from './SearchForm'
 import NoResults from './NoResults'
+import Footer from './Footer'
+import styled from 'styled-components'
 
 //const navigate = useNavigate()
-
-
 
 const propTypes = {
     page: PropTypes.number,
@@ -26,11 +26,32 @@ const defaultProps =
   page: 1
 }
   
+const PaginationContainer = styled.nav`
+    padding: 8px;
+    @font-face {
+        font-family: 'Marvel';
+        src: url(../Marvel.ttf) format('truetype');
+            }
+        ul {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            
+        }
+        li {
+            list-style: none;
+            font-size: 1.5vw;
+            font-family: 'Marvel';
+            font-weight: normal;
+            margin-right: 10px;
+            
+        }
+`
 // const redirectPage(page) = {
     
 // } 
 
-  class CharacterListContainer extends Component {
+  class ComicListContainer extends Component {
 
 
     static propTypes = {
@@ -43,9 +64,10 @@ const defaultProps =
       super(props)
       this.state = {
         loading: undefined,
-        characters: [],
+        comics: [],
         limit: 20,
         inputTerm: undefined,
+        page: 1,
       }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
@@ -65,11 +87,9 @@ const defaultProps =
   
     handlePageChange(pageNumber) {
       console.log(`?page=${pageNumber}`)
+      this.props.setPage(pageNumber)
       this.props.history(`?page=${pageNumber}`)
-      this.setState({page: pageNumber})
-      //this.state = {page: pageNumber}
-      // defaultProps.push({page: pageNumber})
-      console.log(this.state.page)
+      console.log("handlepage", this.state.page)
     }
 
     // handlePageChange = (pageNumber) => {
@@ -95,9 +115,9 @@ const defaultProps =
       const searchOption = term ? { nameStartsWith: term } : null
       let mergedOptions = Object.assign(defaultOptions, searchOption)
       this.setState( { loading: true })
-      fetchObjects('characters', mergedOptions)
+      fetchObjects('comics', mergedOptions)
       .then(res => this.setState({
-        characters: res.data.results,
+        comics: res.data.results,
         offset: res.data.offset,
         limit: res.data.limit,
         total: res.data.total,
@@ -108,14 +128,14 @@ const defaultProps =
     }
   
     render() {
-      const {characters, loading } = this.state
+      const {comics, loading } = this.state
       if (this.state.total === 0) {
         return <NoResults term={this.props.term} />
       }
       return (
         <Container>
           <Heading tag={'h1'}>
-            Characters <small>{this.state.total ? `(${this.state.total})` : ''}</small>
+            COMICS <small>{this.state.total ? `(${this.state.total})` : ''}</small>
           </Heading>
           {/* <SearchForm
             handleChange={this.handleChange}
@@ -125,37 +145,36 @@ const defaultProps =
           <Hr />
           <Row>
             {/* {loading && <Loader  />} */}
-            {characters.map(({id, name, thumbnail, description}, i) => (
+            {comics.map(({id, title, thumbnail, description}, i) => (
               <DataCard
                 key={i}
                 id={id}
-                name={name}
+                name={title}
                 img={thumbnail}
                 description={description}
-                baseLink={'/characters'}
+                baseLink={'/comics'}
               />
             ))}
           </Row>
           <Hr />
           <Row classNames={'text-center'}>
+            <PaginationContainer>
             <Pagination
-            breakLabel="..."
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            pageCount={pageCount}
-            previousLabel="< previous"
-            renderOnZeroPageCount={null}
+              onChange={this.handlePageChange}
+              activePage={this.state.page}
+              itemsCountPerPage={this.state.limit}
+              totalItemsCount={this.state.total || 0}
+              pageRangeDisplayed={50}
+              hideDisabled={true}
             />
+            </PaginationContainer>
           </Row>
+          <Footer/>
         </Container>
       )
     }
   }
   
-
-  export default CharacterListContainer
-
-
-// WEBPACK FOOTER //
-// ./src/components/CharacterListContainer.jsx
+  ComicListContainer.propTypes = propTypes
+  ComicListContainer.defaultProps = defaultProps
+  export default ComicListContainer

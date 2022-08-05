@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom';
 
 
 
-const CharacterView = ({match}) => (
+const CharacterView = ({match, comments}) => (
   <div className='container-fluid'>
-    <CharacterContainer />
+    <CharacterContainer comments={comments} />
   </div>
 )
 

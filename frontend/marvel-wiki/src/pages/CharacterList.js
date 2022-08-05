@@ -1,20 +1,23 @@
 import React from 'react'
 import queryString from 'query-string'
 import CharacterListContainer from '../components/CharacterListContainer'
-import { params } from '../App'
+import { useSearchParams } from 'react-router-dom';
+import styled from 'styled-components'
+//import { params } from '../App'
 
+const CharacterStyle = styled.body`
+  font-style: normal;
+`
 
-const CharacterListView = ({ match, location, history, params, setPage, page}) => {
-  //const params = queryString.parse(location.search)
+const CharacterListView = ({ match, location, history, setPage, page}) => {
+  const params = queryString.parse(location)
   return (  <div className='container-fluid'>
     <CharacterListContainer
-      //page={parseInt(params.page, 10) || 1}
-      //term={params.query || undefined}
       match={match}
       history={history}
       location={location}
       setPage={setPage}
-      page={page}
+      page={parseInt(page, 10)|| 1}
     />
   </div>
   )

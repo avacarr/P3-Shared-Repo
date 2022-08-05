@@ -10,14 +10,13 @@ import Row from './Row'
 import DataList from './DataList'
 import Footer from './Footer'
 import Favorite from './FavoritesForm'
+import styled from'styled-components'
 import Comments from './CommentsForm'
-import styled from 'styled-components'
 
 const propTypes = {
-  charId: PropTypes.string
+  comId: PropTypes.string
 }
-
-const CharacterContainerStyle = styled.nav`
+const ComicContainerStyle = styled.nav`
     padding: 8px;
     @font-face {
         font-family: 'Marvel';
@@ -43,7 +42,7 @@ const CharacterContainerStyle = styled.nav`
         }
 `
 
-class CharacterContainer extends Component {
+class ComicContainer extends Component {
 
 
 
@@ -51,9 +50,9 @@ class CharacterContainer extends Component {
     super(props)
     this.state = {
       loading: undefined,
-      character: {},
+      comic: {},
       img: {},
-      comics: {},
+      characters: {},
       series: {},
       urls: []
     }
@@ -67,11 +66,11 @@ class CharacterContainer extends Component {
   handleFetch() {
     this.setState( { loading: true })
     console.log("window.location", window.location.pathname.split('/')[2])
-    fetchObjectById('characters', window.location.pathname.split('/')[2])  // WAS this.props.charId
+    fetchObjectById('comics', window.location.pathname.split('/')[2])  // WAS this.props.charId
     .then(res => this.setState({
-      character: res.data.results[0],
+       comic: res.data.results[0],
       img: res.data.results[0].thumbnail,
-      comics: res.data.results[0].comics,
+      characters: res.data.results[0].characters,
       series: res.data.results[0].series,
       urls: res.data.results[0].urls,
       loading: false
@@ -79,27 +78,29 @@ class CharacterContainer extends Component {
   }
 
   render() {
-    const {loading, character, img, series, comics, events, urls} = this.state
+    const {loading, comic, img, series, characters, urls} = this.state
     return (
-      <CharacterContainerStyle>
-        <HeroBanner id={character.id} name={character.name} img={img} description={character.description} />
+      <ComicContainerStyle>
+      {/* {loading && <Loader />} */}
+        <HeroBanner id={comic.id} name={comic.title} img={img} description={comic.description} prices={comic.prices}/>
         <Row>
           <div className='col-sm-4'>
-            <h2>{character.name}</h2>
-            <p>{character.description}</p>
-            <Favorite id={character.id} type={"character"}/>
+            <h2>{comic.title}</h2>
+            <p>{comic.description}</p>
+            <Favorite id={comic.id} type={"comic"}/>
+            <p>Issue Number: {comic.issueNumber}</p>
             <ul className='list-inline'>
               {urls.length > 0 &&
                 urls.map((item, index) => (
                   <a href={item.url} key={index}> <span className='label label-primary'>{item.type.toUpperCase()}</span></a>
                   ))}
             </ul>
-            <Comments id={character.id} comments={this.props.comments}/>
+            <Comments id={comic.id} comments={this.props.comments}/>
           </div>
           <div className='col-sm-4'>
-            {comics.items && comics.items.length > 0 &&
-            <DataList listItems={comics} resource={'comics'} label={'Comics'} />
-            }
+            {characters.items && characters.items.length > 0 &&
+             <DataList listItems={characters} resource={`characters`} label={'Characters'} />
+             }
           </div>
           <div className='col-sm-4'>
             {series.items && series.items.length > 0 &&
@@ -108,15 +109,10 @@ class CharacterContainer extends Component {
           </div>
         </Row>
         <Footer/>
-      </CharacterContainerStyle>
+      </ComicContainerStyle>
     )
   }
 }
 
-CharacterContainer.propTypes = propTypes
-export default CharacterContainer
-
-
-
-// WEBPACK FOOTER //
-// ./src/components/CharacterContainer.js
+ComicContainer.propTypes = propTypes
+export default ComicContainer

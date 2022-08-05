@@ -3,60 +3,77 @@ import React from 'react'
 import queryString from 'query-string'
 import CharacterListContainer from '../components/CharacterListContainer'
 import styled from 'styled-components'
+import backgroundimage from '../assets/images/background_image.png'
+import Footer from '../components/Footer'
+import Image from '../assets/images/assemble.png'
 
-const HomeContainer = styled.h1`
+
+const HomeContainer = styled.h2`
     background-color: #266ef6;
-    h1 {
-      
-    }
+    text-align: center;
+    letter-spacing: 2px;
+`
 
-`
-const BodyContainer = styled.p`
+const BodyContainer = styled.h2`
     background-color: #e429f2;
+    text-align: center;
+    letter-spacing: 2px;
 `
-const FootieContainer = styled.p`
+
+const FootieContainer = styled.h2`
     background-color: #ff0130;
+    text-align: center;
+    letter-spacing: 2px;
 `
 
 const TopPageContainer = styled.body`
     background-color: #12e772;
-`
-const BottomPageContainer = styled.body`
-    background-color: #ffd300;
+    text-align: center;
 `
 
-// const BackgroundImage = styled.background`
-//     -webkit-background-size: cover;
-//     -moz-background-size: cover;
-//     -o-background-size: cover;
-//     background-size: cover;
-// `
+const BottomPageContainer = styled.body`
+    background-color: #ffd300;
+    text-align: center;
+    
+  `
+
+const BackgroundImage = styled.img`
+  backgroundImage: url(${backgroundimage});
+  height: 50vw;
+`
+
+const imgStyle = {
+  height: '30vw',
+  width: '100%'
+}
 
 const Home = ({ match, location, history }) => {
   // const params = queryString.parse(location.search)
   return (
-  <>
-  <TopPageContainer>
-    <HomeContainer>
-      {/* <BackgroundImage src="../../assets/images/background_image.png"/> */}
-      <div className= 'home-title'>
-      <h3>This is the Marvel Character Wiki made by the Fantastic Four (not the super group, but the programming team)</h3>
-      </div>
-    </HomeContainer>
-    <BodyContainer>
-      
-        <p>Our Wiki is here so that you, our users, can search an extended database of Marvel Characters and their related events from the comics, the video games, and the movies all at once.
-          Now that you are signed in, please browse our library supplied to us from the official Marvel API. Who are your favorites? Who have you never heard of before?</p>
-      </BodyContainer>
-    </TopPageContainer>
-    <BottomPageContainer>
-      Test
-    </BottomPageContainer>
-      <FootieContainer>
-        <p>We, Alex Carr, Damian Fletcher, Eric Pettaway, and Jeremy Currier A.K.A. the Fantastic Four, are a group of four programmers in the General Assembly Part-time Full Stack immersive course.</p>
-      </FootieContainer>
-  </>
+    <div>
+      <img src={Image} style={imgStyle}/>
+      <BottomPageContainer>
+        <TopPageContainer>
+          <HomeContainer>
+            <div className= 'home-title'>
+              <h2>THIS IS THE MARVEL CHARACTER WIKI MADE BY THE FANTASTIC FOUR, NO NOT THE SUPER GROUP, BUT THE PROGRAMMING TEAM</h2>
+            </div>
+          </HomeContainer>
+          <BodyContainer>
+          <p>OUR WIKI IS HERE SO THAT YOU, OUR USERS, CAN SEARCH AN EXTENDED DATABASE OF MARVEL CHARACTERS AND THEIR RELATED EVENTS FROM THE COMICS, THE VIDEO GAMES, AND THE MOVIES ALL AT ONCE.
+            NOW THAT YOU ARE SIGNED IN, PLEASE BROWSE OUR LIBRARY SUPPLIED TO US FROM THE OFFICIAL MARVEL API. WHO ARE YOUR FAVORITES? WHO HAVE YOU NEVER HEARD OF BEFORE?</p>
+          </BodyContainer>
+        </TopPageContainer>
+        <FootieContainer>
+          <p>WE, ALEX CARR, DAMIAN FLETCHER, ERIC PETTAWAY, AND JEREMY CURRIER A.K.A. THE FANTASTIC FOUR, ARE A GROUP OF FOUR PROGRAMMERS IN THE GENERAL ASSEMBLY PART-TIME FULL STACK IMMERSIVE COURSE.</p>
+        </FootieContainer>
+      </BottomPageContainer>
+      <BackgroundImage />
+      <Footer/>
+    </div>
   )
 }
 
 export default Home
+
+

@@ -8,8 +8,8 @@ const PUBLIC_KEY = API_KEY || '__MARVEL_API_PUBLIC_KEY__'
 const authParams = `apikey=${PUBLIC_KEY}`
 
 function fetchResponseByURL(relativeURL, queryString) {
-  console.log(`call made to ${relativeURL}?${queryString}`)
-  console.time('total')
+  //console.log(`call made to ${relativeURL}?${queryString}`)
+  //console.time('total')
   return fetch(`${BASE_URL}/${relativeURL}?${queryString}`)
     .then(res =>
       res.json()

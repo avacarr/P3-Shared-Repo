@@ -1,5 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+const RowContainer = styled.nav`
+  .row {  
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+`
 
 const propTypes = {
   classNames: PropTypes.string,
@@ -11,9 +19,11 @@ const defaultProps = {
   styles: {}
 }
 const Row = ({ children, classNames, styles }) => (
+  <RowContainer>
   <div className={`row ${classNames}`} style={styles}>
     {children}
   </div>
+  </RowContainer>
 )
 
 Row.propTypes = propTypes

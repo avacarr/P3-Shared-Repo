@@ -7,7 +7,7 @@ const passport = require('passport');
 const cors = require('cors');
 const app = express();
 const cookieParser = require('cookie-parser');
-require('dotenv').config();
+require('dotenv').config({ path: path.resolve(__dirname, '../frontend/marvel-wiki/.env.local') });
 require('./db/connection')
 
 

@@ -10,14 +10,14 @@ import Row from './Row'
 import DataList from './DataList'
 import Footer from './Footer'
 import Favorite from './FavoritesForm'
-import Comments from './CommentsForm'
 import styled from 'styled-components'
+import Comments from './CommentsForm'
 
 const propTypes = {
-  charId: PropTypes.string
+  eveId: PropTypes.string
 }
 
-const CharacterContainerStyle = styled.nav`
+const EventContainerStyle = styled.nav`
     padding: 8px;
     @font-face {
         font-family: 'Marvel';
@@ -43,7 +43,7 @@ const CharacterContainerStyle = styled.nav`
         }
 `
 
-class CharacterContainer extends Component {
+class EventContainer extends Component {
 
 
 
@@ -51,10 +51,11 @@ class CharacterContainer extends Component {
     super(props)
     this.state = {
       loading: undefined,
-      character: {},
+      events: {},
       img: {},
+      characters: {},
+      series:{},
       comics: {},
-      series: {},
       urls: []
     }
   }
@@ -67,10 +68,11 @@ class CharacterContainer extends Component {
   handleFetch() {
     this.setState( { loading: true })
     console.log("window.location", window.location.pathname.split('/')[2])
-    fetchObjectById('characters', window.location.pathname.split('/')[2])  // WAS this.props.charId
+    fetchObjectById('events', window.location.pathname.split('/')[2])  // WAS this.props.charId
     .then(res => this.setState({
-      character: res.data.results[0],
+      events: res.data.results[0],
       img: res.data.results[0].thumbnail,
+      characters: res.data.results[0].characters,
       comics: res.data.results[0].comics,
       series: res.data.results[0].series,
       urls: res.data.results[0].urls,
@@ -79,27 +81,33 @@ class CharacterContainer extends Component {
   }
 
   render() {
-    const {loading, character, img, series, comics, events, urls} = this.state
+    const {loading, events, img, comics, characters, series, urls} = this.state
     return (
-      <CharacterContainerStyle>
-        <HeroBanner id={character.id} name={character.name} img={img} description={character.description} />
+      <EventContainerStyle>
+      {/* {loading && <Loader />} */}
+        <HeroBanner id={events.id} name={events.title} img={img} description={events.description}/>
         <Row>
           <div className='col-sm-4'>
-            <h2>{character.name}</h2>
-            <p>{character.description}</p>
-            <Favorite id={character.id} type={"character"}/>
+            <h2>{events.title}</h2>
+            <p>{events.description}</p>
+            <Favorite id={events.id} type={"event"}/>
             <ul className='list-inline'>
               {urls.length > 0 &&
                 urls.map((item, index) => (
                   <a href={item.url} key={index}> <span className='label label-primary'>{item.type.toUpperCase()}</span></a>
                   ))}
             </ul>
-            <Comments id={character.id} comments={this.props.comments}/>
+            <Comments id={events.id} comments={this.props.comments}/>
+          </div>
+          <div className='col-sm-4'>
+            {characters.items && characters.items.length > 0 &&
+             <DataList listItems={characters} resource={`characters`} label={'Characters'} />
+             }
           </div>
           <div className='col-sm-4'>
             {comics.items && comics.items.length > 0 &&
-            <DataList listItems={comics} resource={'comics'} label={'Comics'} />
-            }
+             <DataList listItems={comics} resource={`comics`} label={'Comics'} />
+             }
           </div>
           <div className='col-sm-4'>
             {series.items && series.items.length > 0 &&
@@ -108,15 +116,10 @@ class CharacterContainer extends Component {
           </div>
         </Row>
         <Footer/>
-      </CharacterContainerStyle>
+      </EventContainerStyle>
     )
   }
 }
 
-CharacterContainer.propTypes = propTypes
-export default CharacterContainer
-
-
-
-// WEBPACK FOOTER //
-// ./src/components/CharacterContainer.js
+EventContainer.propTypes = propTypes
+export default EventContainer

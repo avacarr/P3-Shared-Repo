@@ -9,15 +9,22 @@ import Hr from './Hr'
 import Container from './Container'
 import Heading from './Heading'
 import Row from './Row'
-import Footer from './Footer'
 //import SearchForm from './SearchForm'
 import NoResults from './NoResults'
-import SearchForm from './SearchForm'
+import Footer from './Footer'
 import styled from 'styled-components'
 
 //const navigate = useNavigate()
 
-
+const propTypes = {
+    page: PropTypes.number,
+    term: PropTypes.string
+  }
+  
+const defaultProps =
+  {
+  page: 1
+}
 
 const PaginationContainer = styled.nav`
     padding: 8px;
@@ -25,7 +32,6 @@ const PaginationContainer = styled.nav`
         font-family: 'Marvel';
         src: url(../Marvel.ttf) format('truetype');
             }
-          
         ul {
             display: flex;
             justify-content: space-evenly;
@@ -38,26 +44,14 @@ const PaginationContainer = styled.nav`
             font-family: 'Marvel';
             font-weight: normal;
             margin-right: 10px;
-            
         }
 `
-
-
-const propTypes = {
-    page: PropTypes.number,
-    term: PropTypes.string
-  }
-  
-const defaultProps =
-  {
-  page: 1
-}
   
 // const redirectPage(page) = {
     
 // } 
 
-  class CharacterListContainer extends Component {
+  class EventsListContainer extends Component {
 
 
     static propTypes = {
@@ -70,7 +64,7 @@ const defaultProps =
       super(props)
       this.state = {
         loading: undefined,
-        characters: [],
+        events: [],
         limit: 20,
         inputTerm: undefined,
         page: 1,
@@ -83,19 +77,19 @@ const defaultProps =
     UNSAFE_componentWillReceiveProps(nextProps) {
       window.scrollTo(0, 0)
       this.handleFetch(nextProps.page, nextProps.term)
-      // console.log("UNSAFE_componentWillReceiveProps")
+      console.log("UNSAFE_componentWillReceiveProps")
     }
   
     componentDidMount() {
       this.handleFetch(this.state.page, this.props.term)
-      // console.log("componentDidMount", this.state.page, this.props.term)
+      console.log("componentDidMount", this.state.page, this.props.term)
     }
   
     handlePageChange(pageNumber) {
-      // console.log(`?page=${pageNumber}`)
+      console.log(`?page=${pageNumber}`)
       this.props.setPage(pageNumber)
       this.props.history(`?page=${pageNumber}`)
-      // console.log("handlepage", this.state.page)
+      console.log("handlepage", this.state.page)
     }
 
     // handlePageChange = (pageNumber) => {
@@ -111,56 +105,55 @@ const defaultProps =
   
     handleSubmit(event) {
      event.preventDefault()
-     this.props.history(`?query=${this.state.inputTerm}`)
+     this.props.push(`?query=${this.state.inputTerm}`)
    }
   
     handleFetch(page, term) {
       const LIMIT = 20
       const defaultOptions = {offset: (LIMIT * (page - 1))}
-      // console.log("defaultOptions: ", page, (LIMIT * (page - 1)))
+      console.log("defaultOptions: ", page, (LIMIT * (page - 1)))
       const searchOption = term ? { nameStartsWith: term } : null
       let mergedOptions = Object.assign(defaultOptions, searchOption)
       this.setState( { loading: true })
-      fetchObjects('characters', mergedOptions)
+      fetchObjects('events', mergedOptions)
       .then(res => this.setState({
-        characters: res.data.results,
+        events: res.data.results,
         offset: res.data.offset,
         limit: res.data.limit,
         total: res.data.total,
         count: res.data.count,
         loading: false,
       }))
-      // console.log("handlefetch", this.state)
+      console.log("handlefetch", this.state)
     }
   
     render() {
-      const {characters, loading } = this.state
+      const {events, loading } = this.state
       if (this.state.total === 0) {
         return <NoResults term={this.props.term} />
       }
       return (
         <Container>
           <Heading tag={'h1'}>
-            CHARACTERS <small>{this.state.total ? `(${this.state.total})` : ''}</small>
+            EVENTS <small>{this.state.total ? `(${this.state.total})` : ''}</small>
           </Heading>
           {/* <SearchForm
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             placeholder={'Search for Characters by Name'}
           /> */}
-          <Hr/>
+          <Hr />
           <Row>
             {/* {loading && <Loader  />} */}
-            {characters.map(({id, name, thumbnail, description}, i) => (
-                <DataCard
-                  key={i}
-                  id={id}
-                  name={name}
-                  
-                  img={thumbnail}
-                  description={description}
-                  baseLink={'/characters'}
-                />
+            {events.map(({id, title, thumbnail, description}, i) => (
+              <DataCard
+                key={i}
+                id={id}
+                name={title}
+                img={thumbnail}
+                description={description}
+                baseLink={'/events'}
+              />
             ))}
           </Row>
           <Hr />
@@ -171,11 +164,10 @@ const defaultProps =
               activePage={this.state.page}
               itemsCountPerPage={this.state.limit}
               totalItemsCount={this.state.total || 0}
-              pageRangeDisplayed={48}
+              pageRangeDisplayed={50}
               hideDisabled={true}
-              hideNavigation={false}
             />
-          </PaginationContainer>
+            </PaginationContainer>
           </Row>
           <Footer/>
         </Container>
@@ -183,10 +175,6 @@ const defaultProps =
     }
   }
   
-  CharacterListContainer.propTypes = propTypes
-  CharacterListContainer.defaultProps = defaultProps
-  export default CharacterListContainer
-
-
-// WEBPACK FOOTER //
-// ./src/components/CharacterListContainer.jsx
+  EventsListContainer.propTypes = propTypes
+  EventsListContainer.defaultProps = defaultProps
+  export default EventsListContainer
